@@ -13,5 +13,7 @@
 
 ## 技術スタック
 ‐ Frontend：React
+<br>
 ‐ Backend：Spring boot
+<br>
 ‐ DB：MySQL
