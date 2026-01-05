@@ -1,10 +1,15 @@
-import Demo from './Demo';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Board from './Board';
 
 function App() {
   return (
-    <div className="App container vh-100 d-flex justify-content-center">
-      <Demo />
-    </div>
+    <BrowserRouter>
+      <div className="container vh-100 d-flex justify-content-center">
+        <Routes>
+            <Route path="/board" element={<Board/>} />
+        </Routes>
+      </div>
+    </BrowserRouter>
   );
 }
 
