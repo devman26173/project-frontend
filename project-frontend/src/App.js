@@ -1,10 +1,14 @@
-import Demo from './Demo';
+
+import FoodBoard from './FoodBoard';
+
+
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <Demo />
+        <FoodBoard/>
+      
       </header>
     </div>
   );
