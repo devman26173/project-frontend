@@ -5,14 +5,14 @@ import Post from './components/Post';
 import SignupForm from './SignupForm';
 import Profile from './Profile';
 import { mockPost } from './mockPost';
-import RestaurantBoard from './RestaruantBoard';
+import FoodBoard from './FoodBoard';
 
 function App() {
   return (
     <BrowserRouter>
       <div className="container vh-100 d-flex justify-content-center">
         <Routes>
-            <Route path="/board" element={<RestaurantBoard/>} />
+            <Route path="/board" element={<FoodBoard/>} />
             <Route path="/sign-up" element={<SignupForm/>} />
             <Route path="/profile" element={<Profile/>} />
             <Route path="/post" element={
