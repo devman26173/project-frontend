@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import PostHeader from './food-components/PostHeader';
-import PostActions from './food-components/PostActions';
-import CommentSection from './food-components/CommentSection';
+import PostHeader from './post-components/PostHeader';
+import PostActions from './post-components/PostActions';
+import CommentSection from './post-components/CommentSection';
 
 const Post = ({ post }) => {
   const [isLiked, setIsLiked] = useState(false);
