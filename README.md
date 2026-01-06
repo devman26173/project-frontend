@@ -4,7 +4,7 @@
 <br>
 ‐ ホームページ 担当：Yeunju
 <br>
-‐ 会員機能 担当：Hyeun-ju
+‐ 会員機能 担当：sujin
 <br>
 ‐ 掲示板 担当：Hyeun-ju
 <br>
