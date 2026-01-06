@@ -287,9 +287,19 @@ if (currentView === 'write') {
   </div>
 )}  
 
-      {/* 공지사항 */}
-      <div className="notice-section">
-        <div className="notice-bar">
+      {/* Notice */}
+      <div className="p-2">
+        <div
+          className="d-flex align-items-center"
+          style={{
+            backgroundColor: "#ffecd9",
+            padding: "10px",
+            borderRadius: "4px",
+            fontSize: "13px",
+            fontWeight: "bold",
+            gap: "8px",
+          }}
+        >
           <span>📢</span>
           <span>グルメ掲示板ご利用方法とルール</span>
         </div>
