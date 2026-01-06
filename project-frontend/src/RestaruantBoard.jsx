@@ -38,78 +38,84 @@ export default function RestaurantBoard() {
   ]);
 
   return (
-    <div className="max-w-md mx-auto bg-white h-screen flex flex-col">
+    <div className="w-full max-w-[480px] mx-auto bg-white min-h-screen flex flex-col" lang="ja">
       {/* Header */}
-      <div className="flex items-center justify-between p-4 border-b">
-        <button className="p-1">
+      <div className="flex items-center justify-between px-4 py-3 border-b bg-white sticky top-0 z-10">
+        <button className="p-2 -ml-2">
           <ChevronLeft className="w-6 h-6" />
         </button>
         <div className="flex flex-col items-center">
-          <div className="font-bold text-lg">グルメ掲示板</div>
-          <button className="text-sm text-gray-600 flex items-center gap-1 mt-0.5">
+          <div className="font-bold text-base">グルメ掲示板</div>
+          <button className="text-xs text-gray-600 flex items-center gap-0.5 mt-0.5">
             東京
-            <span className="text-xs">▼</span>
+            <span className="text-[10px]">▼</span>
           </button>
         </div>
-        <div className="flex gap-2">
-          <button className="p-1">
-            <Search className="w-6 h-6" />
+        <div className="flex gap-1">
+          <button className="p-2">
+            <Search className="w-5 h-5" />
           </button>
-          <button className="p-1">
-            <MoreVertical className="w-6 h-6" />
+          <button className="p-2 -mr-2">
+            <MoreVertical className="w-5 h-5" />
           </button>
         </div>
       </div>
 
       {/* Search Box */}
-      <div className="p-4">
-        <div className="bg-gray-100 rounded-lg px-4 py-3 flex items-center gap-2">
-          <Search className="w-5 h-5 text-gray-400" />
+      <div className="px-4 py-3">
+        <div className="bg-gray-100 rounded-lg px-3 py-2.5 flex items-center gap-2">
+          <Search className="w-4 h-4 text-gray-400 flex-shrink-0" />
           <input
             type="text"
-            placeholder="グルメ掲示板 登録レストラン"
-            className="bg-transparent flex-1 outline-none text-sm"
+            placeholder=""
+            className="bg-transparent flex-1 outline-none text-sm placeholder:text-gray-500"
           />
         </div>
       </div>
 
       {/* Notice Section */}
-      <div className="bg-blue-50 border-b border-blue-100">
-        <div className="p-4 flex items-center gap-3">
-          <div className="bg-blue-500 text-white text-xs font-bold px-2 py-1 rounded">
+      <div className="bg-blue-50 border-y border-blue-100">
+        <div className="px-4 py-3 flex items-center gap-2">
+          <div className="bg-blue-500 text-white text-[11px] font-bold px-2 py-0.5 rounded flex-shrink-0">
             お知らせ
           </div>
-          <div className="text-sm text-gray-800">
+          <div className="text-sm text-gray-800 truncate">
             グルメ掲示板ご利用方法とルール
           </div>
         </div>
       </div>
 
       {/* Posts List */}
-      <div className="flex-1 overflow-y-auto">
+      <div className="flex-1 bg-white">
         {posts.map((post, index) => (
-          <div key={post.id} className="border-b">
-            <div className="p-4 flex gap-3">
-              <div className="flex-1">
-                <div className="font-extrabold text-xl mb-2">{post.title}</div>
-                <div className="text-gray-600 text-sm mb-3">{post.description}</div>
-                <div className="flex items-center gap-2 text-xs text-gray-500">
+          <div key={post.id} className="border-b border-gray-200 px-4 py-4">
+            <div className="flex gap-3">
+              <div className="flex-1 min-w-0">
+                <h3 className="font-bold text-base leading-tight mb-1.5 line-clamp-2">
+                  {post.title}
+                </h3>
+                <p className="text-gray-600 text-sm leading-relaxed mb-2.5 line-clamp-2">
+                  {post.description}
+                </p>
+                <div className="flex items-center flex-wrap gap-1.5 text-xs text-gray-500">
                   {index === 0 && (
                     <>
                       <span className="text-red-500">❤️ 0</span>
                       <span>💬 0</span>
-                      <span className="bg-gray-200 px-2 py-0.5 rounded">人気最高+1</span>
+                      <span className="bg-gray-200 text-gray-700 px-1.5 py-0.5 rounded text-[11px] whitespace-nowrap">
+                        人気最高+1
+                      </span>
                     </>
                   )}
-                  <span>{post.date}</span>
-                  <span>|</span>
-                  <span>{post.location}</span>
+                  <span className="whitespace-nowrap">{post.date}</span>
+                  <span className="text-gray-300">|</span>
+                  <span className="truncate">{post.location}</span>
                 </div>
               </div>
               <img 
                 src={post.image} 
                 alt={post.title}
-                className="w-24 h-24 object-cover rounded-lg flex-shrink-0"
+                className="w-20 h-20 rounded-lg object-cover flex-shrink-0"
               />
             </div>
           </div>
@@ -117,9 +123,9 @@ export default function RestaurantBoard() {
       </div>
 
       {/* Floating Write Button */}
-      <button className="fixed bottom-6 left-1/2 -translate-x-1/2 bg-yellow-400 rounded-full px-5 py-3 shadow-lg flex items-center gap-2">
-        <span className="text-sm font-medium">投稿する</span>
-        <Edit className="w-5 h-5" />
+      <button className="fixed bottom-5 left-1/2 -translate-x-1/2 bg-yellow-400 rounded-full pl-4 pr-3 py-2.5 shadow-lg flex items-center gap-1.5 active:bg-yellow-500 transition-colors">
+        <span className="text-sm font-medium whitespace-nowrap">投稿する</span>
+        <Edit className="w-4 h-4" />
       </button>
     </div>
   );
