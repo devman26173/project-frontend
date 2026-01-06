@@ -1,209 +1,240 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 const SignupForm = () => {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    password: '',
-    passwordConfirm: '',
-    region: ''
+    name: "",
+    email: "",
+    password: "",
+    passwordConfirm: "",
+    region: "",
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
   const handleVerify = () => {
     if (!formData.email) {
-      alert('メールを入力してください。');
+      alert("メールを入力してください。");
       return;
     }
-    alert('認証メールが送信されました: ' + formData.email);
+    alert("認証メールが送信されました: " + formData.email);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if (!formData.name) {
-      alert('名前を入力してください。');
+      alert("名前を入力してください。");
       return;
     }
 
     if (!formData.email) {
-      alert('メールを入力してください。');
+      alert("メールを入力してください。");
       return;
     }
 
     if (!formData.password || formData.password.length < 8) {
-      alert('パスワードを8文字以上入力してください。');
+      alert("パスワードを8文字以上入力してください。");
       return;
     }
 
     if (!formData.region) {
-      alert('地域を入力してください。');
+      alert("地域を入力してください。");
       return;
     }
 
-    alert('会員登録が完了しました！');
+    alert("会員登録が完了しました！");
     console.log(formData);
   };
 
   return (
-    <div style={styles.container}>
-      <h1 style={styles.title}>メール会員登録</h1>
-      
+    <div className="container py-4" style={{ maxWidth: "400px" }}>
+      <h1
+        className="text-center fw-bold"
+        style={{ fontSize: "24px", marginBottom: "30px" }}
+      >
+        メール会員登録
+      </h1>
+
       <form onSubmit={handleSubmit}>
-        {/* 名前 */}
-        <div style={styles.formGroup}>
-          <label style={styles.label}>名前</label>
+        {/* 이름 */}
+        <div className="mb-4">
+          <label
+            htmlFor="name"
+            className="form-label"
+            style={{ fontSize: "14px", fontWeight: "500" }}
+          >
+            名前
+          </label>
           <input
             type="text"
+            id="name"
             name="name"
+            className="form-control"
             value={formData.name}
             onChange={handleChange}
             placeholder="名前を入力してください"
-            style={styles.input}
+            style={{
+              backgroundColor: "#e8e8e8",
+              border: "none",
+              fontSize: "14px",
+              color: "#666",
+            }}
           />
         </div>
 
-        {/* メール */}
-        <div style={styles.formGroup}>
-          <label style={styles.label}>メール</label>
-          <div style={styles.emailGroup}>
+        {/* 이메일 */}
+        <div className="mb-4">
+          <label
+            htmlFor="email"
+            className="form-label"
+            style={{ fontSize: "14px", fontWeight: "500" }}
+          >
+            メール
+          </label>
+          <div className="d-flex gap-2">
             <input
               type="email"
+              id="email"
               name="email"
+              className="form-control"
               value={formData.email}
               onChange={handleChange}
               placeholder="メールを入力してください"
-              style={{...styles.input, flex: 1}}
+              style={{
+                backgroundColor: "#e8e8e8",
+                border: "none",
+                fontSize: "14px",
+                color: "#666",
+              }}
             />
             <button
               type="button"
+              className="btn"
               onClick={handleVerify}
-              style={styles.verifyButton}
+              style={{
+                padding: "12px 20px",
+                backgroundColor: "#d8d8d8",
+                border: "none",
+                fontSize: "14px",
+                color: "#666",
+                whiteSpace: "nowrap",
+              }}
             >
               認証する
             </button>
           </div>
         </div>
 
-        {/* パスワード */}
-        <div style={styles.formGroup}>
-          <label style={styles.label}>パスワード</label>
-          <p style={styles.passwordNote}>パスワードを入力してください (8文字以上)</p>
+        {/* 패스워드 */}
+        <div className="mb-4">
+          <label
+            htmlFor="password"
+            className="form-label"
+            style={{ fontSize: "14px", fontWeight: "500" }}
+          >
+            パスワード
+          </label>
+          <p
+            className="mb-1"
+            style={{ fontSize: "12px", color: "#aaa" }}
+          >
+            パスワードを入力してください (8文字以上)
+          </p>
           <input
             type="password"
+            id="password"
             name="password"
+            className="form-control"
             value={formData.password}
             onChange={handleChange}
             placeholder="パスワードを確認してください"
-            style={styles.input}
+            style={{
+              backgroundColor: "#e8e8e8",
+              border: "none",
+              fontSize: "14px",
+              color: "#666",
+            }}
           />
         </div>
-         {/* パスワード確認  */}
-        <div style={styles.formGroup}>
-          <label style={styles.label}>パスワード確認</label>
+
+        {/* 패스워드 확인 */}
+        <div className="mb-4">
+          <label
+            htmlFor="passwordConfirm"
+            className="form-label"
+            style={{ fontSize: "14px", fontWeight: "500" }}
+          >
+            パスワード確認
+          </label>
           <input
-            type="password"  
+            type="password"
+            id="passwordConfirm"
             name="passwordConfirm"
+            className="form-control"
             value={formData.passwordConfirm}
             onChange={handleChange}
             placeholder="パスワードを確認してください"
-            style={styles.input}
+            style={{
+              backgroundColor: "#e8e8e8",
+              border: "none",
+              fontSize: "14px",
+              color: "#666",
+            }}
           />
         </div>
 
-        {/* 地域 */}
-        <div style={styles.formGroup}>
-          <label style={styles.label}>地域</label>
+        {/* 지역 */}
+        <div className="mb-4">
+          <label
+            htmlFor="region"
+            className="form-label"
+            style={{ fontSize: "14px", fontWeight: "500" }}
+          >
+            地域
+          </label>
           <input
             type="text"
+            id="region"
             name="region"
+            className="form-control"
             value={formData.region}
             onChange={handleChange}
             placeholder="地域を選択してください.."
-            style={styles.input}
+            style={{
+              backgroundColor: "#e8e8e8",
+              border: "none",
+              fontSize: "14px",
+              color: "#666",
+            }}
           />
         </div>
 
-        {/* 会員登録ボタン */}
-        <button type="submit" style={styles.submitButton}>
-          会員登録
-        </button>
+        {/* 제출 버튼 */}
+        <div className="d-grid">
+          <button
+            type="submit"
+            className="btn"
+            style={{
+              backgroundColor: "#d0d0d0",
+              border: "none",
+              padding: "14px",
+              fontSize: "16px",
+              color: "#666",
+              fontWeight: "500",
+            }}
+          >
+            会員登録
+          </button>
+        </div>
       </form>
     </div>
   );
-};
-
-const styles = {
-  container: {
-    maxWidth: '400px',
-    margin: '0 auto',
-    padding: '40px 20px',
-    fontFamily: "'Hiragino Sans', 'Yu Gothic', 'Meiryo', sans-serif"
-  },
-  title: {
-    textAlign: 'center',
-    fontSize: '24px',
-    marginBottom: '30px',
-    color: '#000',
-    fontWeight: '600'
-  },
-  formGroup: {
-    marginBottom: '24px'
-  },
-  label: {
-    display: 'block',
-    marginBottom: '8px',
-    fontSize: '14px',
-    color: '#000',
-    fontWeight: '500'
-  },
-  input: {
-    width: '100%',
-    padding: '12px',
-    border: 'none',
-    fontSize: '14px',
-    backgroundColor: '#e8e8e8',
-    color: '#666',
-    outline: 'none',
-    boxSizing: 'border-box'
-  },
-  emailGroup: {
-    display: 'flex',
-    gap: '8px'
-  },
-  verifyButton: {
-    padding: '12px 20px',
-    backgroundColor: '#d8d8d8',
-    border: 'none',
-    cursor: 'pointer',
-    fontSize: '14px',
-    color: '#666',
-    whiteSpace: 'nowrap'
-  },
-  passwordNote: {
-    fontSize: '12px',
-    color: '#aaa',
-    marginTop: '0',
-    marginBottom: '8px'
-  },
-  submitButton: {
-    width: '100%',
-    padding: '14px',
-    backgroundColor: '#d0d0d0',
-    border: 'none',
-    fontSize: '16px',
-    color: '#666',
-    cursor: 'pointer',
-    marginTop: '8px',
-    fontWeight: '500'
-  }
 };
 
 export default SignupForm;

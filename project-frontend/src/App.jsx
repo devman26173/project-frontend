@@ -1,7 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import './App.css';
-import Post from './components/Post';
+import Post from './Post';
 import SignupForm from './SignupForm';
 import Profile from './Profile';
 import { mockPost } from './mockPost';
@@ -16,7 +15,7 @@ function App() {
             <Route path="/sign-up" element={<SignupForm/>} />
             <Route path="/profile" element={<Profile/>} />
             <Route path="/post" element={
-              <div style={{ maxWidth: "600px", margin: "0 auto", padding: "20px" }}>
+              <div style={{ margin: "0 auto", padding: "20px" }}>
                 <Post post={mockPost} />
               </div>} />
             </Routes>

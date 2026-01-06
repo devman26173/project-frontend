@@ -1,6 +1,7 @@
 /* src/FoodBoard.css */
 .board-container {
-  max-width: 400px; /* 모바일 사이즈 고정 */
+  /* 모바일 사이즈 고정 */
+  max-width: 400px; 
   margin: 0 auto;
   background-color: #ffffff;
   min-height: 100vh;
