@@ -2,257 +2,158 @@ import React, { useState } from "react";
 
 const SignupForm = () => {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    password: '',
-    passwordConfirm: '',
-    region: '',
-    prefecture: ''
+    name: "",
+    email: "",
+    password: "",
+    passwordConfirm: "",
+    region: "",
+    prefecture: ""
   });
 
-  // 지역별 도도부현 매핑
   const prefecturesByRegion = {
-    '北海道': ['北海道'],
-    '東北': ['青森県', '岩手県', '宮城県', '秋田県', '山形県', '福島県'],
-    '関東': ['茨城県', '栃木県', '群馬県', '埼玉県', '千葉県', '東京都', '神奈川県'],
-    '中部': ['新潟県', '富山県', '石川県', '福井県', '山梨県', '長野県', '岐阜県', '静岡県', '愛知県'],
-    '近畿': ['三重県', '滋賀県', '京都府', '大阪府', '兵庫県', '奈良県', '和歌山県'],
-    '中国': ['鳥取県', '島根県', '岡山県', '広島県', '山口県'],
-    '四国': ['徳島県', '香川県', '愛媛県', '高知県'],
-    '九州・沖縄': ['福岡県', '佐賀県', '長崎県', '熊本県', '大分県', '宮崎県', '鹿児島県', '沖縄県']
+    北海道: ["北海道"],
+    東北: ["青森県","岩手県","宮城県","秋田県","山形県","福島県"],
+    関東: ["茨城県","栃木県","群馬県","埼玉県","千葉県","東京都","神奈川県"],
+    中部: ["新潟県","富山県","石川県","福井県","山梨県","長野県","岐阜県","静岡県","愛知県"],
+    近畿: ["三重県","滋賀県","京都府","大阪府","兵庫県","奈良県","和歌山県"],
+    中国: ["鳥取県","島根県","岡山県","広島県","山口県"],
+    四国: ["徳島県","香川県","愛媛県","高知県"],
+    九州・沖縄: ["福岡県","佐賀県","長崎県","熊本県","大分県","宮崎県","鹿児島県","沖縄県"]
   };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    
-    // 지역을 변경하면 도도부현 초기화
-    if (name === 'region') {
+    if (name === "region") {
+      // 지역 선택 바뀌면 도도부현 초기화
       setFormData(prev => ({
         ...prev,
         region: value,
-        prefecture: ''
+        prefecture: "",
       }));
     } else {
       setFormData(prev => ({
         ...prev,
-        [name]: value
+        [name]: value,
       }));
     }
   };
 
   const handleVerify = () => {
-    if (!formData.email) {
-      alert("メールを入力してください。");
-      return;
-    }
+    if (!formData.email) return alert("メールを入力してください。");
     alert("認証メールが送信されました: " + formData.email);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    if (!formData.name) {
-      alert("名前を入力してください。");
-      return;
-    }
-
-    if (!formData.email) {
-      alert("メールを入力してください。");
-      return;
-    }
-
-    if (!formData.password || formData.password.length < 8) {
-      alert("パスワードを8文字以上入力してください。");
-      return;
-    }
-
-    if (!formData.region) {
-      alert('地域を選択してください。');
-      return;
-    }
-
-    if (!formData.prefecture) {
-      alert('都道府県を選択してください。');
-      return;
-    }
+    if (!formData.name) return alert("名前を入力してください。");
+    if (!formData.email) return alert("メールを入力してください。");
+    if (!formData.password || formData.password.length < 8)
+      return alert("パスワードを8文字以上入力してください。");
+    if (!formData.region) return alert("地域を選択してください。");
+    if (!formData.prefecture) return alert("都道府県を選択してください。");
 
     alert("会員登録が完了しました！");
     console.log(formData);
   };
 
   return (
-    <div className="container py-4" style={{ maxWidth: "400px" }}>
-      <h1
-        className="text-center fw-bold"
-        style={{ fontSize: "24px", marginBottom: "30px" }}
-      >
-        メール会員登録
-      </h1>
+    <div className="container py-4" style={{ maxWidth: "450px" }}>
+      <h1 className="text-center fw-bold mb-4">メール会員登録</h1>
 
       <form onSubmit={handleSubmit}>
-        {/* 이름 */}
-        <div className="mb-4">
-          <label
-            htmlFor="name"
-            className="form-label"
-            style={{ fontSize: "14px", fontWeight: "500" }}
-          >
-            名前
-          </label>
+        <div className="mb-3">
+          <label className="form-label">名前</label>
           <input
-            type="text"
-            id="name"
-            name="name"
             className="form-control"
+            name="name"
             value={formData.name}
             onChange={handleChange}
-            placeholder="名前を入力してください"
-            style={{
-              backgroundColor: "#e8e8e8",
-              border: "none",
-              fontSize: "14px",
-              color: "#666",
-            }}
           />
         </div>
 
-        {/* 이메일 */}
-        <div className="mb-4">
-          <label
-            htmlFor="email"
-            className="form-label"
-            style={{ fontSize: "14px", fontWeight: "500" }}
-          >
-            メール
-          </label>
+        <div className="mb-3">
+          <label className="form-label">メール</label>
           <div className="d-flex gap-2">
             <input
               type="email"
-              id="email"
-              name="email"
               className="form-control"
+              name="email"
               value={formData.email}
               onChange={handleChange}
-              placeholder="メールを入力してください"
-              style={{
-                backgroundColor: "#e8e8e8",
-                border: "none",
-                fontSize: "14px",
-                color: "#666",
-              }}
             />
             <button
               type="button"
-              className="btn"
+              className="btn btn-secondary"
               onClick={handleVerify}
-              style={{
-                padding: "12px 20px",
-                backgroundColor: "#d8d8d8",
-                border: "none",
-                fontSize: "14px",
-                color: "#666",
-                whiteSpace: "nowrap",
-              }}
             >
               認証する
             </button>
           </div>
 
-          {/* メール */}
-          <div style={styles.formGroup}>
-            <label style={styles.label}>メール</label>
-            <div style={styles.emailGroup}>
-              <input
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                placeholder="メールを入力してください"
-                style={{...styles.input, flex: 1}}
-              />
-              <button
-                type="button"
-                onClick={handleVerify}
-                style={styles.verifyButton}
-              >
-                認証する
-              </button>
-            </div>
-          </div>
+        <div className="mb-3">
+          <label className="form-label">パスワード</label>
+          <input
+            type="password"
+            className="form-control"
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
+            placeholder="8文字以上"
+          />
+        </div>
 
-          {/* パスワード */}
-          <div style={styles.formGroup}>
-            <label style={styles.label}>パスワード</label>
-            <p style={styles.passwordNote}>パスワードを入力してください (8文字以上)</p>
-            <input
-              type="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              placeholder="パスワードを入力してください"
-              style={styles.input}
-            />
-          </div>
+        <div className="mb-3">
+          <label className="form-label">パスワード確認</label>
+          <input
+            type="password"
+            className="form-control"
+            name="passwordConfirm"
+            value={formData.passwordConfirm}
+            onChange={handleChange}
+          />
+        </div>
 
-          {/* パスワード確認  */}
-          <div style={styles.formGroup}>
-            <label style={styles.label}>パスワード確認</label>
-            <input
-              type="password"  
-              name="passwordConfirm"
-              value={formData.passwordConfirm}
-              onChange={handleChange}
-              placeholder="パスワードを確認してください"
-              style={styles.input}
-            />
-          </div>
+        {/* 지역 선택 */}
+        <div className="mb-3">
+          <label className="form-label">地域</label>
+          <select
+            className="form-select"
+            name="region"
+            value={formData.region}
+            onChange={handleChange}
+          >
+            <option value="">地域を選択してください</option>
+            {Object.keys(prefecturesByRegion).map(region => (
+              <option key={region} value={region}>
+                {region}
+              </option>
+            ))}
+          </select>
+        </div>
 
-          {/* 地域 */}
-          <div style={styles.formGroup}>
-            <label style={styles.label}>地域</label>
+        {/* 도도부현 (region 선택 후만 보임) */}
+        {formData.region && (
+          <div className="mb-3">
+            <label className="form-label">都道府県</label>
             <select
-              name="region"
-              value={formData.region}
+              className="form-select"
+              name="prefecture"
+              value={formData.prefecture}
               onChange={handleChange}
-              style={styles.select}
             >
-              <option value="">地域を選択してください</option>
-              <option value="北海道">北海道</option>
-              <option value="東北">東北</option>
-              <option value="関東">関東</option>
-              <option value="中部">中部</option>
-              <option value="近畿">近畿</option>
-              <option value="中国">中国</option>
-              <option value="四国">四国</option>
-              <option value="九州・沖縄">九州・沖縄</option>
+              <option value="">都道府県を選択してください</option>
+              {prefecturesByRegion[formData.region].map(pref => (
+                <option key={pref} value={pref}>
+                  {pref}
+                </option>
+              ))}
             </select>
           </div>
+        )}
 
-          {/* 都道府県 - 지역 선택 후에만 표시 */}
-          {formData.region && (
-            <div style={styles.formGroup}>
-              <label style={styles.label}>都道府県</label>
-              <select
-                name="prefecture"
-                value={formData.prefecture}
-                onChange={handleChange}
-                style={styles.select}
-              >
-                <option value="">都道府県を選択してください</option>
-                {prefecturesByRegion[formData.region]?.map((pref) => (
-                  <option key={pref} value={pref}>
-                    {pref}
-                  </option>
-                ))}
-              </select>
-            </div>
-          )}
-
-          {/* 会員登録ボタン */}
-          <button type="submit" style={styles.submitButton}>
-            会員登録
-          </button>
-        </div>
+        <button type="submit" className="btn btn-primary w-100">
+          会員登録
+        </button>
       </form>
     </div>
   );
