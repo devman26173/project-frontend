@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 const SignupForm = () => {
   const [formData, setFormData] = useState({
@@ -42,27 +42,27 @@ const SignupForm = () => {
 
   const handleVerify = () => {
     if (!formData.email) {
-      alert('メールを入力してください。');
+      alert("メールを入力してください。");
       return;
     }
-    alert('認証メールが送信されました: ' + formData.email);
+    alert("認証メールが送信されました: " + formData.email);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if (!formData.name) {
-      alert('名前を入力してください。');
+      alert("名前を入力してください。");
       return;
     }
 
     if (!formData.email) {
-      alert('メールを入力してください。');
+      alert("メールを入力してください。");
       return;
     }
 
     if (!formData.password || formData.password.length < 8) {
-      alert('パスワードを8文字以上入力してください。');
+      alert("パスワードを8文字以上入力してください。");
       return;
     }
 
@@ -76,27 +76,86 @@ const SignupForm = () => {
       return;
     }
 
-    alert('会員登録が完了しました！');
+    alert("会員登録が完了しました！");
     console.log(formData);
   };
 
   return (
-    <div style={styles.container}>
-      <div style={styles.box}>
-        <h1 style={styles.title}>メール会員登録</h1>
-        
-        <form onSubmit={handleSubmit}>
-          {/* 名前 */}
-          <div style={styles.formGroup}>
-            <label style={styles.label}>名前</label>
+    <div className="container py-4" style={{ maxWidth: "400px" }}>
+      <h1
+        className="text-center fw-bold"
+        style={{ fontSize: "24px", marginBottom: "30px" }}
+      >
+        メール会員登録
+      </h1>
+
+      <form onSubmit={handleSubmit}>
+        {/* 이름 */}
+        <div className="mb-4">
+          <label
+            htmlFor="name"
+            className="form-label"
+            style={{ fontSize: "14px", fontWeight: "500" }}
+          >
+            名前
+          </label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            className="form-control"
+            value={formData.name}
+            onChange={handleChange}
+            placeholder="名前を入力してください"
+            style={{
+              backgroundColor: "#e8e8e8",
+              border: "none",
+              fontSize: "14px",
+              color: "#666",
+            }}
+          />
+        </div>
+
+        {/* 이메일 */}
+        <div className="mb-4">
+          <label
+            htmlFor="email"
+            className="form-label"
+            style={{ fontSize: "14px", fontWeight: "500" }}
+          >
+            メール
+          </label>
+          <div className="d-flex gap-2">
             <input
-              type="text"
-              name="name"
-              value={formData.name}
+              type="email"
+              id="email"
+              name="email"
+              className="form-control"
+              value={formData.email}
               onChange={handleChange}
-              placeholder="名前を入力してください"
-              style={styles.input}
+              placeholder="メールを入力してください"
+              style={{
+                backgroundColor: "#e8e8e8",
+                border: "none",
+                fontSize: "14px",
+                color: "#666",
+              }}
             />
+            <button
+              type="button"
+              className="btn"
+              onClick={handleVerify}
+              style={{
+                padding: "12px 20px",
+                backgroundColor: "#d8d8d8",
+                border: "none",
+                fontSize: "14px",
+                color: "#666",
+                whiteSpace: "nowrap",
+              }}
+            >
+              認証する
+            </button>
           </div>
 
           {/* メール */}
@@ -193,8 +252,8 @@ const SignupForm = () => {
           <button type="submit" style={styles.submitButton}>
             会員登録
           </button>
-        </form>
-      </div>
+        </div>
+      </form>
     </div>
   );
 };
