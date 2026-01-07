@@ -1,14 +1,17 @@
-import SignupForm from './signupform';
-import Login from './Login';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Login from './Login';  // 👈 대문자 확인
+import SignupForm from './signupform';  // 👈 대문자 확인
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <SignupForm />
-        <Login />
-      </header>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignupForm />} />
+      </Routes>
+    </Router>
   );
 }
 

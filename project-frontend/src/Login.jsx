@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
+  const navigate = useNavigate();
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
@@ -13,7 +15,9 @@ function Login() {
     document.head.appendChild(link);
     
     return () => {
-      document.head.removeChild(link);
+      if (document.head.contains(link)) {
+        document.head.removeChild(link);
+      }
     };
   }, []);
 
@@ -35,7 +39,7 @@ function Login() {
   };
 
   const handleSignup = () => {
-    console.log('会員登録ページへ移動');
+    navigate('/signup');
   };
 
   return (

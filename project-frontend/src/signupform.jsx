@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const SignupForm = () => {
+  const navigate = useNavigate();
+  
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -78,6 +81,9 @@ const SignupForm = () => {
 
     alert('会員登録が完了しました！');
     console.log(formData);
+    
+    // 회원가입 완료 후 로그인 페이지로 이동
+    navigate('/login');
   };
 
   return (
