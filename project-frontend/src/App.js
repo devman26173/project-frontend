@@ -1,5 +1,6 @@
 
 import FoodBoard from './FoodBoard';
+import 'bootstrap/dist/css/bootstrap.min.css'; 
 
 
 
