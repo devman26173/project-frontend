@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import PostHeader from './PostHeader';
-import PostActions from './PostActions';
-import CommentSection from './CommentSection';
+import PostHeader from './post-components/PostHeader';
+import PostActions from './post-components/PostActions';
+import CommentSection from './post-components/CommentSection';
 
 const Post = ({ post }) => {
   const [isLiked, setIsLiked] = useState(false);
@@ -30,18 +30,26 @@ const Post = ({ post }) => {
   };
 
   return (
-    <div className="post">
-      <PostHeader 
-        username={post.username}
-        time={post.time}
-      />
-      
-      <div className="post-content">
-        <h3 className="post-title">{post.title}</h3>
-        <p className="post-text">{post.content}</p>
+    <div
+      className="p-3 mb-4"
+      style={{
+        background: '#fff',
+        borderRadius: '12px',
+        boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
+      }}
+    >
+      <PostHeader username={post.username} time={post.time} />
+
+      <div className="mb-3">
+        <h3 style={{ fontSize: '16px', fontWeight: 600, color: '#333' }}>
+          {post.title}
+        </h3>
+        <p style={{ fontSize: '14px', color: '#666', lineHeight: 1.5 }}>
+          {post.content}
+        </p>
       </div>
-      
-      <PostActions 
+
+      <PostActions
         likes={likes}
         comments={commentCount}
         isLiked={isLiked}
@@ -49,12 +57,11 @@ const Post = ({ post }) => {
         onLikeClick={handleLikeClick}
         onCommentClick={handleCommentClick}
       />
-      
-       <CommentSection 
+
+      <CommentSection
         initialComments={post.comments}
         onCommentCountChange={setCommentCount}
         isOpen={isCommentOpen}
-        onToggle={handleCommentClick}
       />
     </div>
   );

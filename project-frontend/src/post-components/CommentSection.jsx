@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
-import { ChevronDown, ChevronUp } from 'lucide-react';
 import CommentInput from './CommentInput';
 import CommentItem from './CommentItem';
 
-const CommentSection = ({ initialComments = [], onCommentCountChange, isOpen }) => {
+const CommentSection = ({
+  initialComments = [],
+  onCommentCountChange,
+  isOpen
+}) => {
   const [comments, setComments] = useState(initialComments);
-  const [sortOrder, setSortOrder] = useState('latest'); // 'latest' or 'oldest'
+  const [sortOrder, setSortOrder] = useState('latest');
 
   const getTotalCommentsCount = (commentsList) => {
     let count = commentsList.length;
@@ -106,32 +109,39 @@ const CommentSection = ({ initialComments = [], onCommentCountChange, isOpen }) 
   };
 
   return (
-    <div className="comment-section">
+    <div className="mt-3">
       {isOpen && (
         <>
-          <div className="comment-header-row">
-            <span>▲</span>
-            <div className="sort-buttons">
-              <button 
-                className={`sort-btn ${sortOrder === 'latest' ? 'active' : ''}`}
-                onClick={() => setSortOrder('latest')}
-              >
-                최신순
-              </button>
-              <button 
-                className={`sort-btn ${sortOrder === 'oldest' ? 'active' : ''}`}
-                onClick={() => setSortOrder('oldest')}
-              >
-                시간순
-              </button>
-            </div>
+          {/* 정렬 버튼 */}
+          <div className="d-flex justify-content-end gap-2 mb-2">
+            <button
+              className={`btn btn-sm ${
+                sortOrder === 'latest' ? 'btn-danger' : 'btn-outline-secondary'
+              }`}
+              style={{ fontSize: '12px' }}
+              onClick={() => setSortOrder('latest')}
+            >
+              최신순
+            </button>
+            <button
+              className={`btn btn-sm ${
+                sortOrder === 'oldest' ? 'btn-danger' : 'btn-outline-secondary'
+              }`}
+              style={{ fontSize: '12px' }}
+              onClick={() => setSortOrder('oldest')}
+            >
+              시간순
+            </button>
           </div>
+
+          {/* 입력폼 */}
           <CommentInput onSubmit={handleCommentSubmit} />
-          
-          <div className="comment-list">
-            {getSortedComments().map((comment) => (
-              <CommentItem 
-                key={comment.id} 
+
+          {/* 댓글 리스트 */}
+          <div>
+            {getSortedComments().map(comment => (
+              <CommentItem
+                key={comment.id}
                 comment={comment}
                 onUpdate={handleCommentUpdate}
                 onDelete={handleCommentDelete}
@@ -146,6 +156,5 @@ const CommentSection = ({ initialComments = [], onCommentCountChange, isOpen }) 
     </div>
   );
 };
-
 
 export default CommentSection;

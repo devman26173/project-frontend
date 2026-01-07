@@ -1,49 +1,28 @@
 import React from 'react';
-import './App.css';
-import Post from './components/Post';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Post from './Post';
+import SignupForm from './SignupForm';
+import Profile from './Profile';
+import Login from './Login';
+import { mockPost } from './mockPost';
+import FoodBoard from './FoodBoard';
 
 function App() {
-  const mockPost = {
-    username: 'そんひゃん',
-    time: '10分前',
-    title: '「グルメ」札幌のスープカレーおすすめ！',
-    content: 'めちゃくちゃ人並んでいるガラクよりスープカレーキングのほうが美味しいです❣',
-    likes: 3,
-    comments: [
-      {
-        id: 1,
-        username: 'ユーザー',
-        text: 'ありがとうー',
-        time: '8分前',
-        likes: 1,
-        replies: [],
-        timestamp: Date.now() - 8 * 60 * 1000,
-      },
-      {
-        id: 2,
-        username: 'ユーザー',
-        text: '行ってみます！！',
-        time: '4分前',
-        likes: 0,
-        replies: [],
-        timestamp: Date.now() - 4 * 60 * 1000,
-      },
-      {
-        id: 3,
-        username: 'ユーザー',
-        text: 'ガラクも美味しかった～！',
-        time: '3分前',
-        likes: 2,
-        replies: [],
-        timestamp: Date.now() - 4 * 60 * 1000,
-      }
-    ]
-  };
-
   return (
-    <div style={{ maxWidth: '600px', margin: '0 auto', padding: '20px' }}>
-      <Post post={mockPost} />
-    </div>
+    <BrowserRouter>
+      <div className="container vh-100 d-flex justify-content-center">
+        <Routes>
+            <Route path="/board" element={<FoodBoard/>} />
+            <Route path="/sign-up" element={<SignupForm/>} />
+            <Route path="/login" element={<Login/>} />
+            <Route path="/profile" element={<Profile/>} />
+            <Route path="/post" element={
+              <div style={{ margin: "0 auto", padding: "20px" }}>
+                <Post post={mockPost} />
+              </div>} />
+            </Routes>
+      </div>
+    </BrowserRouter>
   );
 }
 
