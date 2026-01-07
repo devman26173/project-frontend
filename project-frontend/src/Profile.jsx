@@ -13,7 +13,7 @@ export default function Profile(){
                 <div className="ProfileBoardLeft">
 
                     {/* ID値をDBから受けて表示 */}
-                    <div className="BoxID">ID </div>
+                    <div className="BoxID fs-3">ID </div>
 
                     {/* Guestから受け取ったTXTを表示*/}
                     <div className="BoxIntroduce">Introduce</div>
