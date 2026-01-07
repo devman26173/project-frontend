@@ -1,0 +1,31 @@
+import React from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Post from './Post';
+import SignupForm from './Signupform';
+import Profile from './Profile';
+import Login from './Login';
+import { mockPost } from './mockPost';
+import FoodBoard from './FoodBoard';
+import Home from './Home';
+
+function App() {
+  return (
+    <BrowserRouter>
+      <div className="container vh-100 d-flex justify-content-center">
+        <Routes>
+            <Route path="/" element={<Home/>} />
+            <Route path="/board" element={<FoodBoard/>} />
+            <Route path="/signup" element={<SignupForm/>} />
+            <Route path="/login" element={<Login/>} />
+            <Route path="/profile" element={<Profile/>} />
+            <Route path="/post" element={
+              <div style={{ margin: "0 auto", padding: "20px" }}>
+                <Post post={mockPost} />
+              </div>} />
+            </Routes>
+      </div>
+    </BrowserRouter>
+  );
+}
+
+export default App;
