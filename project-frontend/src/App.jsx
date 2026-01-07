@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Post from './Post';
 import SignupForm from './SignupForm';
 import Profile from './Profile';
+import Login from './Login';
 import { mockPost } from './mockPost';
 import FoodBoard from './FoodBoard';
 
@@ -13,6 +14,7 @@ function App() {
         <Routes>
             <Route path="/board" element={<FoodBoard/>} />
             <Route path="/sign-up" element={<SignupForm/>} />
+            <Route path="/login" element={<Login/>} />
             <Route path="/profile" element={<Profile/>} />
             <Route path="/post" element={
               <div style={{ margin: "0 auto", padding: "20px" }}>
