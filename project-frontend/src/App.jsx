@@ -6,14 +6,16 @@ import Profile from './Profile';
 import Login from './Login';
 import { mockPost } from './mockPost';
 import FoodBoard from './FoodBoard';
+import Home from './Home';
 
 function App() {
   return (
     <BrowserRouter>
       <div className="container vh-100 d-flex justify-content-center">
         <Routes>
+            <Route path="/" element={<Home/>} />
             <Route path="/board" element={<FoodBoard/>} />
-            <Route path="/sign-up" element={<SignupForm/>} />
+            <Route path="/signup" element={<SignupForm/>} />
             <Route path="/login" element={<Login/>} />
             <Route path="/profile" element={<Profile/>} />
             <Route path="/post" element={
