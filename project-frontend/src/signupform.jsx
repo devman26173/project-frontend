@@ -89,7 +89,7 @@ const SignupForm = () => {
               認証する
             </button>
           </div>
-
+        </div>
         <div className="mb-3">
           <label className="form-label">パスワード</label>
           <input
@@ -159,104 +159,5 @@ const SignupForm = () => {
   );
 };
 
-const styles = {
-  container: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    minHeight: '100vh',
-    backgroundColor: '#FFF5F3',
-    fontFamily: "'Hiragino Sans', 'Yu Gothic', 'Meiryo', sans-serif"
-  },
-  box: {
-    background: 'white',
-    padding: '60px 40px',
-    borderRadius: '8px',
-    boxShadow: '0 4px 20px rgba(255, 123, 107, 0.15)',
-    width: '100%',
-    maxWidth: '400px'
-  },
-  title: {
-    textAlign: 'center',
-    fontSize: '24px',
-    marginBottom: '30px',
-    color: '#FF7B6B',
-    fontWeight: '600'
-  },
-  formGroup: {
-    marginBottom: '20px'
-  },
-  label: {
-    display: 'block',
-    marginBottom: '8px',
-    fontSize: '14px',
-    color: '#333',
-    fontWeight: '500'
-  },
-  input: {
-    width: '100%',
-    padding: '12px',
-    border: '1px solid #FFD4CE',
-    borderRadius: '4px',
-    fontSize: '14px',
-    backgroundColor: '#fff',
-    color: '#333',
-    outline: 'none',
-    boxSizing: 'border-box',
-    transition: 'border-color 0.3s, box-shadow 0.3s',
-    boxShadow: '0 2px 6px rgba(255, 123, 107, 0.08)'
-  },
-  select: {
-    width: '100%',
-    padding: '12px',
-    border: '1px solid #FFD4CE',
-    borderRadius: '4px',
-    fontSize: '14px',
-    backgroundColor: '#fff',
-    color: '#333',
-    outline: 'none',
-    boxSizing: 'border-box',
-    transition: 'border-color 0.3s, box-shadow 0.3s',
-    boxShadow: '0 2px 6px rgba(255, 123, 107, 0.08)',
-    cursor: 'pointer'
-  },
-  emailGroup: {
-    display: 'flex',
-    gap: '8px'
-  },
-  verifyButton: {
-    padding: '12px 20px',
-    backgroundColor: '#FFE8E5',
-    border: 'none',
-    borderRadius: '4px',
-    cursor: 'pointer',
-    fontSize: '14px',
-    color: '#FF7B6B',
-    whiteSpace: 'nowrap',
-    transition: 'background-color 0.3s, box-shadow 0.3s',
-    boxShadow: '0 2px 6px rgba(255, 123, 107, 0.1)',
-    fontWeight: '500'
-  },
-  passwordNote: {
-    fontSize: '12px',
-    color: '#999',
-    marginTop: '0',
-    marginBottom: '8px'
-  },
-  submitButton: {
-    width: '100%',
-    padding: '14px',
-    backgroundColor: '#FF7B6B',
-    border: 'none',
-    borderRadius: '4px',
-    fontSize: '16px',
-    color: '#fff',
-    cursor: 'pointer',
-    marginTop: '8px',
-    fontWeight: '500',
-    transition: 'background-color 0.3s, box-shadow 0.3s',
-    boxShadow: '0 2px 8px rgba(255, 123, 107, 0.3)'
-  }
-};
 
 export default SignupForm;
