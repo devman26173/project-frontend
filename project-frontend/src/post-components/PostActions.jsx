@@ -23,7 +23,11 @@ const PostActions = ({
           fontSize: '13px'
         }}
       >
-        <Heart size={18} />
+        <Heart 
+        size={18}
+        fill={isLiked ? 'currentColor' : 'none'}
+        stroke="currentColor"
+        />
         <span>いいね！({likes})</span>
       </button>
 
