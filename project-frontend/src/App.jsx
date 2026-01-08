@@ -6,15 +6,15 @@ import Profile from './Profile';
 import Login from './Login';
 import { mockPost } from './mockPost';
 import FoodBoard from './FoodBoard';
-import Home from './Home';
 import ProfileEdit from './ProfileEdit';
+import JapanMapPage from './MapPage';
 
 function App() {
   return (
     <BrowserRouter>
       <div className="container vh-100 d-flex justify-content-center">
         <Routes>
-            <Route path="/" element={<Home/>} />
+            <Route path="/" element={<JapanMapPage/>} />
             <Route path="/board" element={<FoodBoard/>} />
             <Route path="/signup" element={<SignupForm/>} />
             <Route path="/login" element={<Login/>} />
