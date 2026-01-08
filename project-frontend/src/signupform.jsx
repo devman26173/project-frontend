@@ -13,6 +13,8 @@ const SignupForm = () => {
     prefecture: ''
   });
 
+  const [isEmailVerified, setIsEmailVerified] = useState(false);  // 👈 추가
+
   // 지역별 도도부현 매핑
   const prefecturesByRegion = {
     '北海道': ['北海道'],
@@ -48,7 +50,10 @@ const SignupForm = () => {
       alert('メールを入力してください。');
       return;
     }
+    
+    // 인증 완료 처리
     alert('認証メールが送信されました: ' + formData.email);
+    setIsEmailVerified(true);  // 👈 인증 완료 상태로 변경
   };
 
   const handleSubmit = (e) => {
@@ -61,6 +66,11 @@ const SignupForm = () => {
 
     if (!formData.email) {
       alert('メールを入力してください。');
+      return;
+    }
+
+    if (!isEmailVerified) {  // 👈 추가
+      alert('メール認証を完了してください。');
       return;
     }
 
@@ -125,6 +135,12 @@ const SignupForm = () => {
                 認証する
               </button>
             </div>
+            {/* 👇 인증 완료 메시지 추가 */}
+            {isEmailVerified && (
+              <p style={styles.successMessage}>
+                ✓ メール認証が完了しました
+              </p>
+            )}
           </div>
 
           {/* パスワード */}
@@ -281,6 +297,13 @@ const styles = {
     whiteSpace: 'nowrap',
     transition: 'background-color 0.3s, box-shadow 0.3s',
     boxShadow: '0 2px 6px rgba(255, 123, 107, 0.1)',
+    fontWeight: '500'
+  },
+  successMessage: {  // 👈 새로 추가된 스타일
+    fontSize: '12px',
+    color: '#52C79F',
+    marginTop: '8px',
+    marginBottom: '0',
     fontWeight: '500'
   },
   passwordNote: {
