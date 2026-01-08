@@ -28,7 +28,7 @@ const FoodBoard = () => {
     {
       id: 1,
       title: "六本木で本格アメリカンBBQ🍖",
-      content: "お肉がホロホロでボリューム満点！",
+      content: "お肉がホロホロでボリューム満点！スモーキーな香りが食欲をそそります。大人数での飲み会にも最高✨",
       meta: "| 12:24 | 作成者",
       img: "https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?w=400",
       rating: 5,
@@ -37,7 +37,7 @@ const FoodBoard = () => {
     {
       id: 2,
       title: "恵比寿の絶品パエリアランチ🇪🇸",
-      content: "本格的パエリアおすすめ！",
+      content: "本格的なスペイン料理が楽しめるお店。魚介の旨味が凝縮されたパエリアは絶対に食べてほしい一品です！",
       meta: "| 12/24 | 作成者",
       img: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400",
       rating: 4,
@@ -271,6 +271,7 @@ if (currentView === 'write') {
           )}
         </span>
       </div>
+    </header>
 
       {/* 검색창 */}
       {searchOpen && (
@@ -337,12 +338,16 @@ if (currentView === 'write') {
           {post.meta}
         </div>
       </div>
+      <img src={post.img} alt="food" className="post-image" />
+    </div>
+  ))}
+</div>
 
-      {/* 投稿 버튼 */}
-      <div className="position-fixed bottom-0 start-50 translate-middle-x mb-3">
-        <button className="btn btn-primary px-4" onClick={handleWrite}>
-          投稿する ✏️
-        </button>
+      {/* 플로팅 버튼 */}
+      <div className="write-button-container">
+        <button className="write-button" 
+        onClick={() => setCurrentView('write')}
+  >投稿する ✏️</button>
       </div>
     </div>
   );
