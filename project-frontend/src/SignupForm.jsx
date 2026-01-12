@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const SignupForm = () => {
@@ -13,24 +13,32 @@ const SignupForm = () => {
     prefecture: ''
   });
 
-  const [isEmailVerified, setIsEmailVerified] = useState(false);  // 👈 추가
+  const [isEmailVerified, setIsEmailVerified] = useState(false);
+  const [prefecturesByRegion, setPrefecturesByRegion] = useState({});
+  const [loading, setLoading] = useState(true);
 
-  // 지역별 도도부현 매핑
-  const prefecturesByRegion = {
-    '北海道': ['北海道'],
-    '東北': ['青森県', '岩手県', '宮城県', '秋田県', '山形県', '福島県'],
-    '関東': ['茨城県', '栃木県', '群馬県', '埼玉県', '千葉県', '東京都', '神奈川県'],
-    '中部': ['新潟県', '富山県', '石川県', '福井県', '山梨県', '長野県', '岐阜県', '静岡県', '愛知県'],
-    '近畿': ['三重県', '滋賀県', '京都府', '大阪府', '兵庫県', '奈良県', '和歌山県'],
-    '中国': ['鳥取県', '島根県', '岡山県', '広島県', '山口県'],
-    '四国': ['徳島県', '香川県', '愛媛県', '高知県'],
-    '九州・沖縄': ['福岡県', '佐賀県', '長崎県', '熊本県', '大分県', '宮崎県', '鹿児島県', '沖縄県']
-  };
+  // API에서 지역 데이터 가져오기
+  useEffect(() => {
+    const fetchRegions = async () => {
+      try {
+        const response = await fetch('http://localhost:8080/api/regions');
+        const data = await response.json();
+        
+        setPrefecturesByRegion(data.prefecturesByRegion);
+        setLoading(false);
+      } catch (error) {
+        console.error('地域データの取得に失敗しました:', error);
+        setLoading(false);
+        alert('地域データの取得に失敗しました。');
+      }
+    };
+
+    fetchRegions();
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     
-    // 지역을 변경하면 도도부현 초기화
     if (name === 'region') {
       setFormData(prev => ({
         ...prev,
@@ -51,9 +59,8 @@ const SignupForm = () => {
       return;
     }
     
-    // 인증 완료 처리
     alert('認証メールが送信されました: ' + formData.email);
-    setIsEmailVerified(true);  // 👈 인증 완료 상태로 변경
+    setIsEmailVerified(true);
   };
 
   const handleSubmit = (e) => {
@@ -69,7 +76,7 @@ const SignupForm = () => {
       return;
     }
 
-    if (!isEmailVerified) {  // 👈 추가
+    if (!isEmailVerified) {
       alert('メール認証を完了してください。');
       return;
     }
@@ -92,9 +99,18 @@ const SignupForm = () => {
     alert('会員登録が完了しました！');
     console.log(formData);
     
-    // 회원가입 완료 후 로그인 페이지로 이동
     navigate('/login');
   };
+
+  if (loading) {
+    return (
+      <div style={styles.container}>
+        <div style={styles.box}>
+          <p style={{ textAlign: 'center', color: '#FF7B6B' }}>読み込み中...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div style={styles.container}>
@@ -135,7 +151,6 @@ const SignupForm = () => {
                 認証する
               </button>
             </div>
-            {/* 👇 인증 완료 메시지 추가 */}
             {isEmailVerified && (
               <p style={styles.successMessage}>
                 ✓ メール認証が完了しました
@@ -157,11 +172,11 @@ const SignupForm = () => {
             />
           </div>
 
-          {/* パスワード確認  */}
+          {/* パスワード確認 */}
           <div style={styles.formGroup}>
             <label style={styles.label}>パスワード確認</label>
             <input
-              type="password"  
+              type="password"
               name="passwordConfirm"
               value={formData.passwordConfirm}
               onChange={handleChange}
@@ -180,18 +195,15 @@ const SignupForm = () => {
               style={styles.select}
             >
               <option value="">地域を選択してください</option>
-              <option value="北海道">北海道</option>
-              <option value="東北">東北</option>
-              <option value="関東">関東</option>
-              <option value="中部">中部</option>
-              <option value="近畿">近畿</option>
-              <option value="中国">中国</option>
-              <option value="四国">四国</option>
-              <option value="九州・沖縄">九州・沖縄</option>
+              {Object.keys(prefecturesByRegion).map((region) => (
+                <option key={region} value={region}>
+                  {region}
+                </option>
+              ))}
             </select>
           </div>
 
-          {/* 都道府県 - 지역 선택 후에만 표시 */}
+          {/* 都道府県 */}
           {formData.region && (
             <div style={styles.formGroup}>
               <label style={styles.label}>都道府県</label>
@@ -299,7 +311,7 @@ const styles = {
     boxShadow: '0 2px 6px rgba(255, 123, 107, 0.1)',
     fontWeight: '500'
   },
-  successMessage: {  // 👈 새로 추가된 스타일
+  successMessage: {
     fontSize: '12px',
     color: '#52C79F',
     marginTop: '8px',
