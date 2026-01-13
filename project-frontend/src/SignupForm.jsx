@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const SignupForm = () => {
   const navigate = useNavigate();
@@ -17,14 +18,15 @@ const SignupForm = () => {
   const [prefecturesByRegion, setPrefecturesByRegion] = useState({});
   const [loading, setLoading] = useState(true);
 
-  // API에서 지역 데이터 가져오기
+  // axios로 지역 데이터 가져오기
   useEffect(() => {
     const fetchRegions = async () => {
       try {
-        const response = await fetch('http://localhost:8080/api/regions');
-        const data = await response.json();
+        // Spring Boot의 /SignupForm 경로에서 데이터 가져오기
+        const response = await axios.get('http://localhost:8080/signupform');
         
-        setPrefecturesByRegion(data.prefecturesByRegion);
+        // response.data가 region 데이터
+        setPrefecturesByRegion(response.data);
         setLoading(false);
       } catch (error) {
         console.error('地域データの取得に失敗しました:', error);
@@ -86,6 +88,11 @@ const SignupForm = () => {
       return;
     }
 
+    if (formData.password !== formData.passwordConfirm) {
+      alert('パスワードが一致しません。');
+      return;
+    }
+
     if (!formData.region) {
       alert('地域を選択してください。');
       return;
@@ -98,7 +105,6 @@ const SignupForm = () => {
 
     alert('会員登録が完了しました！');
     console.log(formData);
-    
     navigate('/login');
   };
 
