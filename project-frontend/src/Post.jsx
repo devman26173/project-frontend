@@ -1,9 +1,63 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+// 경로 수정: ./PostHeader → ./post-components/PostHeader
 import PostHeader from './post-components/PostHeader';
 import PostActions from './post-components/PostActions';
 import CommentSection from './post-components/CommentSection';
 
-const Post = ({ post }) => {
+const Post = () => {
+  // 서버에서 가져온 게시글들을 저장할 state
+  const [posts, setPosts] = useState([]);
+  // 로딩 상태 관리
+  const [loading, setLoading] = useState(true);
+  // 에러 상태 관리
+  const [error, setError] = useState(null);
+
+  // 컴포넌트가 처음 렌더링될 때 데이터 가져오기
+  useEffect(() => {
+    // 비동기 함수 정의
+    const fetchPosts = async () => {
+      try {
+        // axios로 GET 요청 보내기
+        const response = await axios.get('http://localhost:8080/posts');
+        
+        // 가져온 데이터를 state에 저장
+        setPosts(response.data);
+        setLoading(false);
+      } catch (err) {
+        // 에러 발생시 에러 메시지 저장
+        console.error('데이터 가져오기 실패:', err);
+        setError('게시글을 불러오는데 실패했습니다.');
+        setLoading(false);
+      }
+    };
+
+    // 함수 실행
+    fetchPosts();
+  }, []); // 빈 배열 = 컴포넌트가 처음 렌더링될 때만 실행
+
+  // 로딩 중일 때 보여줄 화면
+  if (loading) {
+    return <div className="loading">로딩 중...</div>;
+  }
+
+  // 에러 발생시 보여줄 화면
+  if (error) {
+    return <div className="error">{error}</div>;
+  }
+
+  // 게시글들을 렌더링
+  return (
+    <div className="posts-container">
+      {posts.map((post) => (
+        <PostItem key={post.id} post={post} />
+      ))}
+    </div>
+  );
+};
+
+// 개별 게시글 컴포넌트 (기존 로직 유지)
+const PostItem = ({ post }) => {
   const [isLiked, setIsLiked] = useState(false);
   const [likes, setLikes] = useState(post.likes);
   const [isCommentOpen, setIsCommentOpen] = useState(false);
@@ -17,7 +71,7 @@ const Post = ({ post }) => {
       });
       return count;
     };
-    return getTotalCount(post.comments);
+    return getTotalCount(post.comments || []);
   });
 
   const handleLikeClick = () => {
@@ -30,26 +84,18 @@ const Post = ({ post }) => {
   };
 
   return (
-    <div
-      className="p-3 mb-4"
-      style={{
-        background: '#fff',
-        borderRadius: '12px',
-        boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
-      }}
-    >
-      <PostHeader username={post.username} time={post.time} />
-
-      <div className="mb-3">
-        <h3 style={{ fontSize: '16px', fontWeight: 600, color: '#333' }}>
-          {post.title}
-        </h3>
-        <p style={{ fontSize: '14px', color: '#666', lineHeight: 1.5 }}>
-          {post.content}
-        </p>
+    <div className="post">
+      <PostHeader 
+        username={post.username}
+        time={post.time}
+      />
+      
+      <div className="post-content">
+        <h3 className="post-title">{post.title}</h3>
+        <p className="post-text">{post.content}</p>
       </div>
-
-      <PostActions
+      
+      <PostActions 
         likes={likes}
         comments={commentCount}
         isLiked={isLiked}
@@ -57,11 +103,12 @@ const Post = ({ post }) => {
         onLikeClick={handleLikeClick}
         onCommentClick={handleCommentClick}
       />
-
-      <CommentSection
-        initialComments={post.comments}
+      
+      <CommentSection 
+        initialComments={post.comments || []}
         onCommentCountChange={setCommentCount}
         isOpen={isCommentOpen}
+        onToggle={handleCommentClick}
       />
     </div>
   );
