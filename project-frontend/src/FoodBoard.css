@@ -1,25 +1,29 @@
 .board-container {
   /* 모바일 사이즈 고정 */
-  max-width: 400px; 
+  width: 400px;
   margin: 0 auto;
   background-color: #ffffff;
   min-height: 100vh;
   font-family: 'Apple SD Gothic Neo', sans-serif;
   position: relative;
-  border: 1px solid #eeeeee;
 }
 
 /* 상단 주황색 헤더 */
 .board-header {
-  background-color: #ffb773; /* 사진과 동일한 색상 */
+  background-color: #ff9800;
+  /* 사진과 동일한 색상 */
   padding: 12px 16px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  height: 69px;
+  box-sizing: border-box;
+  color: black;
 }
 
 .header-title-box {
   text-align: center;
+  flex: 1;
 }
 
 .header-main-title {
@@ -31,16 +35,17 @@
 .header-sub-title {
   font-size: 12px;
   font-weight: 800;
+  white-space: nowrap;
 }
 
 /* 공지사항 바 */
 .notice-section {
-  padding: 10px 15px;
+  padding: 8px 16px;
 }
 
 .notice-bar {
   background-color: #ffecd9;
-  padding: 10px;
+  padding: 12px;
   border-radius: 4px;
   font-size: 13px;
   font-weight: bold;
@@ -108,7 +113,7 @@
   border-radius: 30px;
   font-weight: bold;
   font-size: 15px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -119,8 +124,10 @@
 .write-container {
   min-height: 100vh;
   background-color: #f5f5f5;
-  max-width: 400px; /* 게시판과 동일한 최대 너비 */
-  margin: 0 auto; /* 중앙 정렬 */
+  width: 400px;
+  /* 게시판과 동일한 최대 너비 */
+  margin: 0 auto;
+  /* 중앙 정렬 */
 }
 
 .write-header {
@@ -129,9 +136,10 @@
   justify-content: space-between;
   padding: 12px 16px;
   background-color: #ff9800;
-  color: white;
-  border-bottom: 1px solid #e0e0e0;
-  font-size: 16px; 
+  color: black;
+  font-size: 16px;
+  height: 69px;
+  box-sizing: border-box;
 }
 
 .write-header span {
@@ -142,7 +150,7 @@
 .write-header button {
   background: none;
   border: none;
-  color: white;
+  color: black;  
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
