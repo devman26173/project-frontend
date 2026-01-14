@@ -16,23 +16,30 @@ const FeedbackPage = ({ onBack }) => {
   };
 
   return (
-    <div className="min-vh-100 bg-light" style={{ maxWidth: '400px', margin: '0 auto' }}>
-      <header 
-        className="d-flex align-items-center justify-content-between p-3 text-white" 
-        style={{ backgroundColor: '#ff9800' }}
+    <div className="min-vh-100 bg-light" style={{ width: '400px', margin: '0 auto' }}>
+      <header
+        className="d-flex align-items-center justify-content-between "
+        style={{
+          backgroundColor: '#ff9800',
+          padding: '12px 16px', 
+          height: '69px',
+          boxSizing: 'border-box',
+          color: 'black'
+        }}
       >
         <span onClick={onBack} style={{ cursor: 'pointer', fontSize: '20px' }}>〈</span>
-        <span className="fw-bold">ご意見・お問い合わせ</span>
-        <button 
+        <span className="fw-bold" style={{ fontWeight: 'bold' }}>ご意見・お問い合わせ</span>
+        <button
           onClick={handleSubmit}
-          className="btn btn-link text-white text-decoration-none p-0 fw-semibold"
+          className="btn btn-link text-none p-0 fw-semibold"
+          style={{ color: 'black' }}
         >
           送信
         </button>
       </header>
 
       <div className="p-3">
-        <div className="card mb-3">
+        <div className="bg-white rounded mb-3" style={{ padding: '16px', boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
           <div className="card-body">
             <label className="form-label">メールアドレス (任意)</label>
             <input

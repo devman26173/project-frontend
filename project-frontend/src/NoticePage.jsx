@@ -18,7 +18,7 @@ const NoticePage = ({ onBack }) => {
       content: `• タイトル: 店名と簡単な特徴
 - 評価: 1〜5点で評価
 - 内容: 味、雰囲気、価格帯などの詳細レビュー
-- 写真: 料理写真のURLを追加 (任意)` 
+- 写真: 料理写真のURLを追加 (任意)`
     },
     {
       id: 3,
@@ -33,26 +33,32 @@ const NoticePage = ({ onBack }) => {
 
   return (
     <div className="min-vh-100 bg-light" style={{ maxWidth: '400px', margin: '0 auto' }}>
-      <header 
-        className="d-flex align-items-center justify-content-between p-3 text-white" 
-        style={{ backgroundColor: '#ff9800' }}
+      <header
+        className="d-flex align-items-center justify-content-between"
+        style={{
+          backgroundColor: '#ff9800',
+          padding: '12px 16px',
+          height: '69px',
+          boxSizing: 'border-box',
+          color: 'black'
+        }}
       >
         <span onClick={onBack} style={{ cursor: 'pointer', fontSize: '20px' }}>〈</span>
-        <span className="fw-bold">お知らせ</span>
+        <span className="fw-bold" style={{fontWeight: 'bold'}}>お知らせ</span>
         <span style={{ width: '20px' }}></span>
-        
+
       </header>
 
       <div className="p-3">
         {notices.map(notice => (
-          <div key={notice.id} className="card mb-3">
+          <div key={notice.id} className="bg-white rounded mb-3" style={{ padding: '16px', boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
             <div className="card-body">
               <div className="d-flex justify-content-between align-items-start mb-2">
                 <h5 className="card-title mb-0" style={{ whiteSpace: 'pre-line', fontSize: '16px' }}>{notice.title}</h5>
                 <span className="badge bg-warning text-dark">📢</span>
               </div>
               <p className="text-muted small mb-3">{notice.date}</p>
-              <p className="card-text" style={{ whiteSpace: 'pre-line', fontSize: '12px' }}>
+              <p className="card-text" style={{ whiteSpace: 'pre-line', fontSize: '14px', lineHeight: '1.6', marginBottom: 0 }}>
                 {notice.content}
               </p>
             </div>

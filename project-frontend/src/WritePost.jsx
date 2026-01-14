@@ -1,20 +1,27 @@
 import React from 'react';
 
 const WritePost = ({ newPost, setNewPost, onBack, onSubmit, regions, StarRating }) => {
-const [selectedMain, setSelectedMain] = React.useState('');
-const mainRegions = Object.keys(regions).filter(r => r !== 'すべて');
-    return (
-    <div className="min-vh-100 bg-light" style={{ maxWidth: '400px', margin: '0 auto' }}>
+  const [selectedMain, setSelectedMain] = React.useState('');
+  const mainRegions = Object.keys(regions).filter(r => r !== 'すべて');
+  return (
+    <div className="min-vh-100 bg-light" style={{ width: '400px', margin: '0 auto' }}>
       {/* 헤더 */}
-      <header 
-        className="d-flex align-items-center justify-content-between p-3 text-white" 
-        style={{ backgroundColor: '#ff9800' }}
+      <header
+        className="d-flex align-items-center justify-content-between"
+        style={{
+          backgroundColor: '#ff9800',
+          padding: '12px 16px',
+          height: '69px',
+          boxSizing: 'border-box',
+          color: 'black'
+        }}
       >
         <span onClick={onBack} style={{ cursor: 'pointer', fontSize: '20px' }}>〈</span>
-        <span className="fw-bold">投稿</span>
-        <button 
+        <span className="fw-bold" style={{ fontWeight: '800' }}>投稿</span>
+        <button
           onClick={onSubmit}
-          className="btn btn-link text-white text-decoration-none p-0 fw-semibold"
+          className="btn btn-link text-decoration-none p-0 fw-semibold"
+          style={{ color: 'black' }}
         >
           完了
         </button>
@@ -28,9 +35,9 @@ const mainRegions = Object.keys(regions).filter(r => r !== 'すべて');
           className="form-control mb-3"
           placeholder="タイトルを入力"
           value={newPost.title}
-          onChange={(e) => setNewPost({...newPost, title: e.target.value})}
+          onChange={(e) => setNewPost({ ...newPost, title: e.target.value })}
         />
-        
+
         {/* 이중 지역 선택 카테고리 */}
         <div className="card mb-3">
           <div className="card-body">
@@ -42,7 +49,7 @@ const mainRegions = Object.keys(regions).filter(r => r !== 'すべて');
                 value={selectedMain}
                 onChange={(e) => {
                   setSelectedMain(e.target.value);
-                  setNewPost({...newPost, region: ''}); // 지방이 바뀌면 세부 지역 초기화
+                  setNewPost({ ...newPost, region: '' }); // 지방이 바뀌면 세부 지역 초기화
                 }}
               >
                 <option value="">地方を選択</option>
@@ -55,7 +62,7 @@ const mainRegions = Object.keys(regions).filter(r => r !== 'すべて');
               <select
                 className="form-select"
                 value={newPost.region}
-                onChange={(e) => setNewPost({...newPost, region: e.target.value})}
+                onChange={(e) => setNewPost({ ...newPost, region: e.target.value })}
                 disabled={!selectedMain}
               >
                 <option value="">都道府県</option>
@@ -67,35 +74,35 @@ const mainRegions = Object.keys(regions).filter(r => r !== 'すべて');
             {!newPost.region && <div className="text-danger small mt-1">※ 地域を選択してください</div>}
           </div>
         </div>
-        
+
         {/* 별점 선택 */}
         <div className="card mb-3">
           <div className="card-body">
             <label className="form-label text-muted small mb-2">評価を選択</label>
-            <StarRating 
-              rating={newPost.rating} 
-              onRate={(star) => setNewPost({...newPost, rating: star})}
+            <StarRating
+              rating={newPost.rating}
+              onRate={(star) => setNewPost({ ...newPost, rating: star })}
             />
           </div>
         </div>
-        
+
         {/* 내용 입력 */}
         <textarea
           className="form-control mb-3"
           placeholder="内容を入力"
           rows="10"
           value={newPost.content}
-          onChange={(e) => setNewPost({...newPost, content: e.target.value})}
+          onChange={(e) => setNewPost({ ...newPost, content: e.target.value })}
           style={{ resize: 'none' }}
         />
-        
+
         {/* 이미지 URL 입력 */}
         <input
           type="text"
           className="form-control mb-3"
           placeholder="画像URL (任意)"
           value={newPost.imageUrl}
-          onChange={(e) => setNewPost({...newPost, imageUrl: e.target.value})}
+          onChange={(e) => setNewPost({ ...newPost, imageUrl: e.target.value })}
         />
       </div>
     </div>
